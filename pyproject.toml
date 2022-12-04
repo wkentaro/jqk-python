@@ -1,0 +1,28 @@
+[project]
+name = "jqk"
+version = "0.1"
+description = "Query key finder for jq"
+requires-python = ">=3.7"
+authors = [
+  { name = "Kentaro Wada", email = "www.kentaro.wada@gmail.com" },
+]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+dependencies = [
+  "rich",
+]
+
+[project.scripts]
+jqk = "jqk.__main__:main"
