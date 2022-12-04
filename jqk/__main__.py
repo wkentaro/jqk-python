@@ -122,7 +122,12 @@ Example:
         sys.exit(0)
 
     string = sys.stdin.read()
-    data = json.loads(string)
+
+    try:
+        data = json.loads(string)
+    except json.decoder.JSONDecodeError as e:
+        print(f"parse error: {e}", file=sys.stderr)
+        sys.exit(1)
 
     formatted = format_data(data)
 
