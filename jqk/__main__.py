@@ -22,7 +22,7 @@ class StrData:
         self._value = value
 
     def __repr__(self):
-        return f'"{self._value}"'
+        return f'\033[0;32m"{self._value}"\033[0m'
 
 
 def format_data(data, parent=""):
@@ -132,7 +132,8 @@ Example:
     formatted = format_data(data)
 
     console = rich.console.Console(
-        force_terminal=force_terminal, theme=rich.theme.Theme({"repr.str": "green"})
+        force_terminal=force_terminal,
+        theme=rich.theme.Theme(inherit=False),
     )
     try:
         console.print(
