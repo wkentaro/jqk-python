@@ -134,11 +134,16 @@ Example:
     console = rich.console.Console(
         force_terminal=force_terminal, theme=rich.theme.Theme({"repr.str": "green"})
     )
-    console.print(
-        rich.pretty.Pretty(
-            formatted, indent_guides=False, expand_all=True, indent_size=2
+    try:
+        console.print(
+            rich.pretty.Pretty(
+                formatted, indent_guides=False, expand_all=True, indent_size=2
+            )
         )
-    )
+    except BrokenPipeError:
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
+        sys.exit(1)
 
 
 if __name__ == "__main__":
