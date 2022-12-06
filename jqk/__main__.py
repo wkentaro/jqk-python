@@ -133,7 +133,7 @@ Example:
 
     console = rich.console.Console(
         force_terminal=force_terminal,
-        theme=rich.theme.Theme(inherit=False),
+        theme=rich.theme.Theme({"repr.brace": "bold"}, inherit=False),
     )
     try:
         console.print(
