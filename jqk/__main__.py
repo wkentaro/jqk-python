@@ -41,6 +41,30 @@ def format_data(data, parent=""):
         return data
 
 
+def print_data_keys(console, data):
+    if isinstance(data, dict):
+        for key, value in data.items():
+            print_data(console=console, data=key)
+            print_data_keys(console=console, data=value)
+    elif isinstance(data, list):
+        for value in data:
+            print_data_keys(console=console, data=value)
+    else:
+        pass
+
+
+
+def print_data(console, data):
+    console.print(
+        rich.pretty.Pretty(
+            data,
+            indent_guides=False,
+            expand_all=True,
+            indent_size=2,
+        )
+    )
+
+
 __version__ = pkg_resources.get_distribution("jqk").version
 
 
@@ -111,6 +135,12 @@ Example:
         help="force color output even with pipe",
     )
     parser.add_argument(
+        "--list",
+        "-l",
+        action="store_true",
+        help="list all keys",
+    )
+    parser.add_argument(
         "file",
         nargs="?",
         help="JSON file to parse",
@@ -145,11 +175,10 @@ Example:
         theme=rich.theme.Theme({"repr.brace": "bold"}, inherit=False),
     )
     try:
-        console.print(
-            rich.pretty.Pretty(
-                formatted, indent_guides=False, expand_all=True, indent_size=2
-            )
-        )
+        if args.list:
+            print_data_keys(console=console, data=formatted)
+        else:
+            print_data(console=console, data=formatted)
     except BrokenPipeError:
         devnull = os.open(os.devnull, os.O_WRONLY)
         os.dup2(devnull, sys.stdout.fileno())
