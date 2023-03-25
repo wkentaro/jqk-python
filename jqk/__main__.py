@@ -110,6 +110,11 @@ Example:
         action="store_true",
         help="force color output even with pipe",
     )
+    parser.add_argument(
+        "file",
+        nargs="?",
+        help="JSON file to parse",
+    )
     args = parser.parse_args()
 
     if args.color_output:
@@ -117,11 +122,15 @@ Example:
     else:
         force_terminal = None
 
-    if sys.stdin.isatty():
-        parser.print_help()
-        sys.exit(0)
-
-    string = sys.stdin.read()
+    if args.file is None:
+        if sys.stdin.isatty():
+            parser.print_help()
+            sys.exit(0)
+        else:
+            string = sys.stdin.read()
+    else:
+        with open(args.file) as f:
+            string = f.read()
 
     try:
         data = json.loads(string)
