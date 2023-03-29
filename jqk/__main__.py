@@ -1,9 +1,9 @@
 import argparse
 import json
-import pkg_resources
 import os
 import sys
 
+import pkg_resources
 import rich.console
 import rich.pretty
 import rich.text
@@ -31,7 +31,10 @@ def format_data(data, parent=""):
     elif isinstance(data, list):
         if parent == "":
             parent = "."
-        return [format_data(data[i], parent=f"{parent}[{i}]") for i in range(len(data))]
+        return [
+            format_data(data[i], parent=f"{parent}[{i}]")
+            for i in range(len(data))
+        ]
     elif isinstance(data, dict):
         return {
             Key(f"{parent}.{k}"): format_data(data[k], parent=f"{parent}.{k}")
@@ -51,7 +54,6 @@ def print_data_keys(console, data):
             print_data_keys(console=console, data=value)
     else:
         pass
-
 
 
 def print_data(console, data):
@@ -118,7 +120,7 @@ Example:
 
     $ cat data.json | jq .japan[1].population -r
     2.7M
-    """
+    """  # NOQA
         % __version__,
     )
     parser.add_argument(
