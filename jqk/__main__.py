@@ -67,7 +67,7 @@ def print_data(console, data):
     )
 
 
-__version__ = pkg_resources.get_distribution("jqk").version
+__version__ = pkg_resources.get_distribution("jqkey").version
 
 
 class _ShowVersionAction(argparse.Action):

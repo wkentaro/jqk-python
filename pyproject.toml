@@ -1,5 +1,5 @@
 [project]
-name = "jqk"
+name = "jqkey"
 version = "0.1"
 description = "Query key finder for jq"
 requires-python = ">=3.7"
