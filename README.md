@@ -1,3 +1,9 @@
+### DISCLAIMER
+
+[Jqk](https://github.com/wkentaro/jqk), which is written by Rust language is
+much faster than this, so it is highly recommended over this Python version
+unless there is legitimate reasons.
+
 # jqk-python
 
 ## Installation
